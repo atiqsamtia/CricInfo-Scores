@@ -1,0 +1,7 @@
+{
+    "name": "atiqsamtia/cricinfo-scores",
+    "description": "Get Live Scores from ESPN",
+    "autoload" : {
+        "psr-4": { "Cricket\\": "" }
+    }
+}
