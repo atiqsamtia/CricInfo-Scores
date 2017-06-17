@@ -17,15 +17,11 @@ class LiveScores
 
         $json = json_decode($this->getURL($url));
 
-        $result = array();
-
-        $result["description"] = $json->description;
-        $result["status"] = $json->live->status;
-        $result["summary"] = $json->match->current_summary;
-        $result["team1_name"] = $json->match->team1_name;
-        $result["team2_name"] = $json->match->team2_name;
-
-        return $result;
+        return new Score($json-> match->team1_name,
+            $json->match->team2_name,
+            $json->description,
+            $json->match->current_summary,
+            $json->live->status);
 
     }
 
@@ -56,8 +52,10 @@ class LiveScores
                     "mid" => $mid
                 );
 
+                $match = new Match($teams[0], $teams[1], $mid);
+
                 if($detailed)
-                    $match['score']= $this->getScore($mid);
+                    $match->setScore($this->getScore($mid));
 
                 $matches[] = $match;
 
