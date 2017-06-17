@@ -30,7 +30,7 @@ class LiveScores
     }
 
 
-    public function liveMatchesList(){
+    public function liveMatchesList($detailed = false){
 
         $string = $this->getURL($this->LIVE_SCORE_URL);
         $xml = simplexml_load_string($string);
@@ -53,9 +53,11 @@ class LiveScores
                 $match = array(
                     "team1_name" => $teams[0],
                     "team2_name" => $teams[1],
-                    "mid" => $mid,
-                    "score" => $this->getScore($mid)
+                    "mid" => $mid
                 );
+
+                if($detailed)
+                    $match['score']= $this->getScore($mid);
 
                 $matches[] = $match;
 
