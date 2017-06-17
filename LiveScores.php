@@ -9,7 +9,7 @@ class LiveScores
 {
     private $BASE_URL = "http://www.espncricinfo.com/ci/engine/match/";
     private $LIVE_SCORE_URL = "http://static.espncricinfo.com/rss/livescores.xml";
-    private $ALLOWED_TEAMS = array("pakistan", "india", "south africa", "australia", "england", "bangladesh", "new zealand", "sri lanka", "west indies", "ireland", "zimbabwe", "kenya", "afghanistan", "karachi kings", "quetta gladiators", "islamabad united", "peshawar zalmi", "lahore qalandars");
+    private $ALLOWED_TEAMS = array("pakistan", "india", "south africa", "australia", "england", "bangladesh", "new zealand", "sri lanka", "west indies", "ireland", "zimbabwe", "kenya","scotland", "afghanistan", "karachi kings", "quetta gladiators", "islamabad united", "peshawar zalmi", "lahore qalandars");
 
     public function getScore($match){
 
@@ -53,7 +53,8 @@ class LiveScores
                 $match = array(
                     "team1_name" => $teams[0],
                     "team2_name" => $teams[1],
-                    "mid" => $mid
+                    "mid" => $mid,
+                    "score" => $this->getScore($mid)
                 );
 
                 $matches[] = $match;
