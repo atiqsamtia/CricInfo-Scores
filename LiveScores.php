@@ -17,7 +17,7 @@ class LiveScores
 
         $json = json_decode($this->getURL($url));
 
-        return new Score($json-> match->team1_name,
+        return new Score($json->match->team1_name,
             $json->match->team2_name,
             $json->description,
             $json->match->current_summary,
@@ -44,13 +44,8 @@ class LiveScores
             // Teams
             $teams = explode(" v ", $teams);
             // If Team is allowed.
-            if (in_array(strtolower($teams[0]), $this->ALLOWED_TEAMS) or in_array(strtolower($teams[1]), $this->ALLOWED_TEAMS)) {
+            if (in_array(trim(str_replace("women","",strtolower($teams[0]))), $this->ALLOWED_TEAMS) or in_array(trim(str_replace("women","",strtolower($teams[1]))), $this->ALLOWED_TEAMS)) {
 
-                $match = array(
-                    "team1_name" => $teams[0],
-                    "team2_name" => $teams[1],
-                    "mid" => $mid
-                );
 
                 $match = new Match($teams[0], $teams[1], $mid);
 
